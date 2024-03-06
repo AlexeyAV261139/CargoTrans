@@ -11,7 +11,7 @@ public partial class Driver
 
     public string LastName { get; set; } = null!;
 
-    public int Phone { get; set; }
+    public string Phone { get; set; }
 
     public virtual ICollection<ActiveRoute> ActiveRoutes { get; set; } = new List<ActiveRoute>();
 }
