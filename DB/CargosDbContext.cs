@@ -31,7 +31,7 @@ public partial class CargosDbContext : DbContext
         => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CargosDB;Username=postgres;Password=qwerty");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+    {       
         modelBuilder.Entity<ActiveRoute>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("active_routes_pkey");
@@ -138,6 +138,8 @@ public partial class CargosDbContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+
+
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
