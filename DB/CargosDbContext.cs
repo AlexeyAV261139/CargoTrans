@@ -102,7 +102,7 @@ public partial class CargosDbContext : DbContext
             entity.ToTable("cargo_types");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Name)
+            entity.Property(e => e.Size)
                 .HasMaxLength(30)
                 .HasColumnName("name");
         });
@@ -139,7 +139,49 @@ public partial class CargosDbContext : DbContext
 
         OnModelCreatingPartial(modelBuilder);
 
+        FillBD(modelBuilder);
+    }
 
+    private void FillBD(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Car>().HasData(new[]
+        {
+            new Car { Id = 1, Brand = "BMW", Number = "A123BB", LoadCapacityPerKg = 1000 },
+            new Car { Id = 2, Brand = "BMW", Number = "A123BC", LoadCapacityPerKg = 500},
+            new Car { Id = 3, Brand = "Mercedes-Benz", Number = "B222BK", LoadCapacityPerKg = 500},
+            new Car { Id = 4, Brand = "Lada", Number = "K234OM", LoadCapacityPerKg = 600}
+        });
+
+        modelBuilder.Entity<CargoType>().HasData(new[]
+        {
+            new CargoType { Id = 1, Size = "Большой"},
+            new CargoType { Id = 2, Size = "Средний"},
+            new CargoType { Id = 3, Size = "Большой"},
+            new CargoType { Id = 4, Size = "Маленький"}
+        });
+
+        modelBuilder.Entity<Cargo>().HasData(new[]
+        {
+            new Cargo { Id = 1, CargoTypeId = 1, Requirements = "Не ставить друг на друга"},
+            new Cargo { Id = 2, CargoTypeId = 3, Requirements = "Не переворачивать"},
+            new Cargo { Id = 3, CargoTypeId = 4, Requirements = ""}
+        });
+
+        modelBuilder.Entity<Driver>().HasData(new[]
+        {
+            new Driver { Id = 1, FirstName = "Алексей", LastName = "Соколов", Phone = "89516918858"},
+            new Driver { Id = 2, FirstName = "Артем", LastName = "Петров", Phone = "89091234323"},
+            new Driver { Id = 3, FirstName = "Мирон", LastName = "Кулишов", Phone = "88005553535"},
+            new Driver { Id = 4, FirstName = "Сергей", LastName = "Лавров", Phone = "89005432324"}
+        });
+
+        modelBuilder.Entity<Route>().HasData(new[] 
+        { 
+            new Route { Id = 1, Destination = "Ул. Николаева, д 27", DistancvePerKm = 13, PricePerPenny = 156723}, 
+            new Route { Id = 2, Destination = "Ул. Кирова, д 96", DistancvePerKm = 30, PricePerPenny = 240000},
+            new Route { Id = 3,Destination = "Ул. Попова, д 100", DistancvePerKm = 8, PricePerPenny = 60050}, 
+            new Route { Id = 4,Destination = "Ул. 25 сентября, д 7", DistancvePerKm = 24, PricePerPenny = 209008}
+        })
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
