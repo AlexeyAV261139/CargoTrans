@@ -16,11 +16,11 @@ namespace CargoTrans
         }
 
 
-        protected override void OnLoad(EventArgs e)
+        protected async override void OnLoad(EventArgs e)
         {
             _dbContext = new CargosDbContext();
 
-            LoadDataToDataGrid(_dbContext.Cars);
+            await LoadDataToDataGrid(_dbContext.Cars);
 
         }
 
@@ -38,33 +38,39 @@ namespace CargoTrans
 
         private async void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            labelTable.Text = ðåéñûToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.ActiveRoutes);
         }
 
         private async void cargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            labelTable.Text = ãðóçûToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.Cargos);
         }
 
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            labelTable.Text = àâòîToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.Cars);
         }
 
         private async void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            labelTable.Text = âîäèòåëèToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.Drivers);
         }
 
         private  async void RoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            labelTable.Text = ìàðøðóòûToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.Routes);
         }
 
         private async Task LoadDataToDataGrid<T>(DbSet<T> dbSet) where  T : class
         {
             if (dbSet is null) throw new Exception();
-            await dbSet.LoadAsync();
+            await dbSet.LoadAsync();            
             dataGridViewMain.DataSource = dbSet.Local.ToBindingList();
         }
     }
