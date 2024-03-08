@@ -1,6 +1,7 @@
 using DB;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System.ComponentModel;
 
 namespace CargoTrans
@@ -19,8 +20,8 @@ namespace CargoTrans
         {
             _dbContext = new CargosDbContext();
 
-            _dbContext.ActiveRoutes.Load();
-            dataGridViewMain.DataSource = _dbContext.ActiveRoutes.Local.ToBindingList();
+            LoadDataToDataGrid(_dbContext.Cars);
+
         }
 
 
@@ -30,39 +31,41 @@ namespace CargoTrans
             _dbContext = null;
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private async void buttonSave_Click(object sender, EventArgs e)
         {
-            _dbContext?.SaveChanges();
+            await _dbContext?.SaveChangesAsync();
         }
 
-        private void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _dbContext.ActiveRoutes.Load();
-            dataGridViewMain.DataSource = _dbContext.ActiveRoutes.Local.ToBindingList();
+            await LoadDataToDataGrid(_dbContext.ActiveRoutes);
         }
 
-        private void cargoToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void cargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _dbContext.Cargos.Load();
-            dataGridViewMain.DataSource = _dbContext.Cargos.Local.ToBindingList();
+            await LoadDataToDataGrid(_dbContext.Cargos);
         }
 
-        private void CarsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _dbContext.Cars.Load();
-            dataGridViewMain.DataSource = _dbContext.Cars.Local.ToBindingList();
+            await LoadDataToDataGrid(_dbContext.Cars);
         }
 
-        private void DriversToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _dbContext.Drivers.Load();
-            dataGridViewMain.DataSource = _dbContext.Drivers.Local.ToBindingList();
+            await LoadDataToDataGrid(_dbContext.Drivers);
         }
 
-        private void RoutesToolStripMenuItem_Click(object sender, EventArgs e)
+        private  async void RoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _dbContext.Routes.Load();
-            dataGridViewMain.DataSource = _dbContext.Routes.Local.ToBindingList();
+            await LoadDataToDataGrid(_dbContext.Routes);
+        }
+
+        private async Task LoadDataToDataGrid<T>(DbSet<T> dbSet) where  T : class
+        {
+            if (dbSet is null) throw new Exception();
+            await dbSet.LoadAsync();
+            dataGridViewMain.DataSource = dbSet.Local.ToBindingList();
         }
     }
 }
