@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CargoTrans", "CargoTrans\CargoTrans.csproj", "{47F2EB70-2FD0-43FE-95AD-AB475FEB1EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms", "CargoTrans\Forms.csproj", "{47F2EB70-2FD0-43FE-95AD-AB475FEB1EB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DB\DB.csproj", "{EC33E8FE-5708-49D5-9B92-0FF40979C762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Postgres", "DB\DataAccess.Postgres.csproj", "{EC33E8FE-5708-49D5-9B92-0FF40979C762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{6667CB6D-57F4-415C-96FB-6E85120EF6D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EC33E8FE-5708-49D5-9B92-0FF40979C762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC33E8FE-5708-49D5-9B92-0FF40979C762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC33E8FE-5708-49D5-9B92-0FF40979C762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6667CB6D-57F4-415C-96FB-6E85120EF6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6667CB6D-57F4-415C-96FB-6E85120EF6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6667CB6D-57F4-415C-96FB-6E85120EF6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6667CB6D-57F4-415C-96FB-6E85120EF6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

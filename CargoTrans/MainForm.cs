@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.ComponentModel;
 
-namespace CargoTrans
+namespace Forms
 {
     public partial class MainForm : Form
     {
@@ -20,9 +20,18 @@ namespace CargoTrans
         {
             _dbContext = new CargosDbContext();
 
-            var cargos = _dbContext.Cargos
+            var cargos = await _dbContext.Cargos
                 .Include(c => c.CargoType)
-                .ToList();
+                .Select(c => new
+                {
+                    c.Id,
+                    CargoType =  c.CargoType!.Name,
+                    c.Requirements
+                })                
+                .ToListAsync();
+            
+
+            dataGridViewMain.DataSource = cargos;            
         }
 
 

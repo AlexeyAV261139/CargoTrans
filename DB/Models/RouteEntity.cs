@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DB.Entities;
 
-public partial class Route
+public partial class RouteEntity
 {
     public int Id { get; set; }
 
@@ -13,5 +13,5 @@ public partial class Route
 
     public int? PricePerPenny { get; set; }
 
-    public virtual ICollection<ActiveRoute> ActiveRoutes { get; set; } = new List<ActiveRoute>();
+    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
 }

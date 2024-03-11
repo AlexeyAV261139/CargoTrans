@@ -1,4 +1,4 @@
-namespace CargoTrans
+namespace Forms
 {
     internal static class Program
     {

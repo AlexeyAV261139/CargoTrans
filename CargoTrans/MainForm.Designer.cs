@@ -1,4 +1,4 @@
-﻿namespace CargoTrans
+﻿namespace Forms
 {
     partial class MainForm
     {

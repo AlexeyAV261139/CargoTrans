@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DB.Entities;
 
-public partial class Driver
+public partial class DriverEntity
 {
     public int Id { get; set; }
 
@@ -13,5 +13,5 @@ public partial class Driver
 
     public string Phone { get; set; } = null!;
 
-    public virtual ICollection<ActiveRoute> ActiveRoutes { get; set; } = new List<ActiveRoute>();
+    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
 }
