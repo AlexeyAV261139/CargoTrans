@@ -29,7 +29,10 @@ public partial class CargosDbContext : DbContext
     public virtual DbSet<Route> Routes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CargosDB;Username=postgres;Password=qwerty");
+    {
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CargosDB;Username=postgres;Password=qwerty");
+        optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {       

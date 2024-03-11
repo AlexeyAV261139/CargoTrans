@@ -20,8 +20,9 @@ namespace CargoTrans
         {
             _dbContext = new CargosDbContext();
 
-            await LoadDataToDataGrid(_dbContext.Cars);
-
+            var cargos = _dbContext.Cargos
+                .Include(c => c.CargoType)
+                .ToList();
         }
 
 
@@ -37,7 +38,7 @@ namespace CargoTrans
         }
 
         private async void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {           
             labelTable.Text = ðåéñûToolStripMenuItem.Text;
             await LoadDataToDataGrid(_dbContext.ActiveRoutes);
         }
