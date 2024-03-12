@@ -1,14 +1,11 @@
-﻿namespace DB.Entities;
-
-public partial class CargoEntity
+﻿namespace DataAccess.Postgres.Models
 {
-    public int Id { get; set; }
+    public class CargoEntity
+    {
+        public Guid Id { get; set; }
 
-    public int? CargoTypeId { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-    public string? Requirements { get; set; }
-
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
-
-    public virtual CargoTypeEntity? CargoType { get; set; }
+        public List<FlightEntity> Flights { get; set; } = [];
+    }
 }

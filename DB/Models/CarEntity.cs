@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DB.Entities;
-
-public partial class CarEntity
+﻿namespace DataAccess.Postgres.Models
 {
-    public int Id { get; set; }
+    public class CarEntity
+    {
+        public Guid Id { get; set; }
 
-    public string Brand { get; set; } = null!;
+        public string Brand { get; set; } = string.Empty;
 
-    public string Number { get; set; } = null!;
+        public int LiftingCapacity { get; set; }
 
-    public int LoadCapacityPerKg { get; set; }
-
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+        public List<FlightEntity> Flights { get; set; } = [];
+    }
 }

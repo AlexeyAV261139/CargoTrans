@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DB.Entities;
-
-public partial class DriverEntity
+﻿namespace DataAccess.Postgres.Models
 {
-    public int Id { get; set; }
+    public class DriverEntity
+    {
+        public Guid Id { get; set; }
 
-    public string FirstName { get; set; } = null!;
+        public string Name { get; set; } = string.Empty;
 
-    public string LastName { get; set; } = null!;
+        public DateOnly Birthday { get; set; }
 
-    public string Phone { get; set; } = null!;
-
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+        public List<FlightEntity> Flights { get; set; } = [];
+    }
 }
