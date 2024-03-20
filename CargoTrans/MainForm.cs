@@ -7,6 +7,7 @@ namespace CargoTrans
     public partial class MainForm : Form
     {
         private CargosDbContext? _dbContext;
+        private Repository repos;
 
         public MainForm()
         {
@@ -16,8 +17,12 @@ namespace CargoTrans
 
         protected override void OnLoad(EventArgs e)
         {
-            _dbContext = new CargosDbContext();
+            repos = new Repository(new CargosDbContext());
+            
 
+            repos.GetCargos().ToDataTable();
+            dataGridViewMain
+            
             _dbContext.ActiveRoutes.Load();
             dataGridViewMain.DataSource = _dbContext.ActiveRoutes.Local.ToBindingList();
         }
@@ -36,6 +41,7 @@ namespace CargoTrans
 
         private void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             _dbContext.ActiveRoutes.Load();
             dataGridViewMain.DataSource = _dbContext.ActiveRoutes.Local.ToBindingList();
         }

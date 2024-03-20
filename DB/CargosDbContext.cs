@@ -105,7 +105,7 @@ public partial class CargosDbContext : DbContext
             entity.ToTable("cargo_types");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Size)
+            entity.Property(e => e.Name)
                 .HasMaxLength(30)
                 .HasColumnName("name");
         });
@@ -157,10 +157,10 @@ public partial class CargosDbContext : DbContext
 
         modelBuilder.Entity<CargoType>().HasData(new[]
         {
-            new CargoType { Id = 1, Size = "Большой"},
-            new CargoType { Id = 2, Size = "Средний"},
-            new CargoType { Id = 3, Size = "Большой"},
-            new CargoType { Id = 4, Size = "Маленький"}
+            new CargoType { Id = 1, Name = "Большой"},
+            new CargoType { Id = 2, Name = "Средний"},
+            new CargoType { Id = 3, Name = "Большой"},
+            new CargoType { Id = 4, Name = "Маленький"}
         });
 
         modelBuilder.Entity<Cargo>().HasData(new[]
