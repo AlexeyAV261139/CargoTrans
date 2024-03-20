@@ -28,7 +28,10 @@ public partial class CargosDbContext : DbContext
     public virtual DbSet<Route> Routes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CargosDB;Username=postgres;Password=qwerty");
+    {
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=CargosDB;Username=postgres;Password=qwerty");
+        optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {       
@@ -175,13 +178,13 @@ public partial class CargosDbContext : DbContext
             new Driver { Id = 4, FirstName = "Сергей", LastName = "Лавров", Phone = "89005432324"}
         });
 
-        modelBuilder.Entity<Route>().HasData(new[] 
-        { 
-            new Route { Id = 1, Destination = "Ул. Николаева, д 27", DistancvePerKm = 13, PricePerPenny = 156723}, 
+        modelBuilder.Entity<Route>().HasData(new[]
+        {
+            new Route { Id = 1, Destination = "Ул. Николаева, д 27", DistancvePerKm = 13, PricePerPenny = 156723},
             new Route { Id = 2, Destination = "Ул. Кирова, д 96", DistancvePerKm = 30, PricePerPenny = 240000},
-            new Route { Id = 3,Destination = "Ул. Попова, д 100", DistancvePerKm = 8, PricePerPenny = 60050}, 
+            new Route { Id = 3,Destination = "Ул. Попова, д 100", DistancvePerKm = 8, PricePerPenny = 60050},
             new Route { Id = 4,Destination = "Ул. 25 сентября, д 7", DistancvePerKm = 24, PricePerPenny = 209008}
-        })
+        });
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
