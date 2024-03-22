@@ -8,6 +8,6 @@ namespace Application.Interfaces.Repositories
         Task Delete(Guid id);
         Task <List<Cargo>> Get();
         Task <Cargo> GetById(Guid id);
-        Task <Cargo> Update(Guid id, )
+        Task Update(Cargo cargo);
     }
 }
