@@ -2,9 +2,9 @@
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DB
+namespace DB.Repositories
 {
-    public class CargosRepository
+    public class CargosRepository : IRepository
     {
         private readonly CargosDbContext _dbContext;
         private readonly DbSet<CargoEntity> _cargos;
@@ -22,9 +22,9 @@ namespace DB
                 .ToListAsync();
         }
 
-        public async Task<List<CargoEntity>> GetWithTypes()
+        public async Task<List<CargoEntity>> GetWithInclude()
         {
-            return await _cargos                
+            return await _cargos
                 .Include(c => c.CargoType)
                 .ToListAsync();
         }
@@ -45,18 +45,9 @@ namespace DB
             throw new Exception();
         }
 
-
-        public IQueryable<Cargo> GetCargos()
+        public Task Delete(Guid id)
         {
-            var cargos = _dbContext.Cargos.Join(_dbContext.CargoTypes,
-                c => c.CargoTypeId,
-                ct => ct.Id,
-                (c, ct) => new Cargo
-                {
-                    Type = ct.Name,
-                    Requirements = c.Requirements ?? string.Empty
-                });
-            return cargos;
+            throw new NotImplementedException();
         }
     }
 }

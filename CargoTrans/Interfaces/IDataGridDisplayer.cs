@@ -1,5 +1,4 @@
-﻿using DB;
-using DB.Entities;
+﻿using DB.Entities;
 
 namespace CargoTrans
 {
