@@ -18,7 +18,7 @@ namespace DB.Repositories
 
         public Task Create(Cargo cargo)
         {
-            await _cargos.AddAsync(cargo);
+
         }
 
         public Task Delete(Guid id)
