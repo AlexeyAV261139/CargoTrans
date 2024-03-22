@@ -5,7 +5,7 @@ namespace DB
 {
     public static class Extensions
     {
-        public static DataTable ToDataTable<T>(this IQueryable<T> items)
+        public static DataTable ToDataTable<T>(this IEnumerable<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);
 

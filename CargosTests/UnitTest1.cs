@@ -19,7 +19,6 @@ namespace CargosTests
         public void ColumnCountCheck()
         {
             
-            DisplayerToDataGrid displayer = new DisplayerToDataGrid();
 
 
         }
