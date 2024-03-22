@@ -18,12 +18,12 @@ namespace CargoTrans
         protected override void OnLoad(EventArgs e)
         {
             repos = new Repository(new CargosDbContext());
-            
 
-            repos.GetCargos().ToDataTable();
-            dataGridViewMain
+            var cargos = repos.GetCargos();
+                     
             
             _dbContext.ActiveRoutes.Load();
+            var 
             dataGridViewMain.DataSource = _dbContext.ActiveRoutes.Local.ToBindingList();
         }
 

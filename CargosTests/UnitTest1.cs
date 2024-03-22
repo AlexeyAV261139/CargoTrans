@@ -5,11 +5,23 @@ namespace CargosTests
         [Fact]
         public void IncludeData()
         {
-            
-            
-            var result = GetCargos();
 
+
+            // var result = GetCargos();
+
+
+        }
+    }
+
+    public class DisplayerToDataGridTests
+    {
+        [Fact]
+        public void ColumnCountCheck()
+        {
             
+            DisplayerToDataGrid displayer = new DisplayerToDataGrid();
+
+
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace DB
+﻿using Core.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace DB
 {
     public class Repository
     {
@@ -9,15 +12,15 @@
             _dbContext = cargosDbContext;
         }
 
-        public IQueryable<> GetCargos()
+        public IQueryable<Cargo> GetCargos()
         {
             var cargos = _dbContext.Cargos.Join(_dbContext.CargoTypes,
                 c => c.CargoTypeId,
                 ct => ct.Id,
-                (c, ct) => new
+                (c, ct) => new Cargo
                 {
                     Type = ct.Name,
-                    c.Requirements
+                    Requirements = c.Requirements
                 });
             return cargos;
 
