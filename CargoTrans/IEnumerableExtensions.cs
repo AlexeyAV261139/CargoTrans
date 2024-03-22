@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace DB
 {
-    public static class Extensions
+    public static class IEnumerableExtensions
     {
         public static DataTable ToDataTable<T>(this IEnumerable<T> items)
         {

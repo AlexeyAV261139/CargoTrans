@@ -1,10 +1,11 @@
-﻿using Core.Models;
+﻿using Application.Interfaces.Repositories;
+using Core.Models;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DB.Repositories
 {
-    public class CargosRepository
+    public class CargosRepository : ICargosRepository
     {
         private readonly CargosDbContext _dbContext;
         private readonly DbSet<CargoEntity> _cargos;
@@ -15,6 +16,16 @@ namespace DB.Repositories
             _cargos = _dbContext.Cargos;
         }
 
+        public Task Create(Cargo cargo)
+        {
+            await _cargos.AddAsync(cargo);
+        }
+
+        public Task Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<CargoEntity>> Get()
         {
             return await _cargos
@@ -22,30 +33,24 @@ namespace DB.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<CargoEntity>> GetWithInclude()
+        public Task<Cargo> GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<CargoEntity>> GetWithType()
         {
             return await _cargos
                 .Include(c => c.CargoType)
                 .ToListAsync();
         }
 
-        public async Task<CarEntity> GetById(Guid id)
+        public Task Update(Cargo cargo)
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
 
-        public async Task Add(CargoEntity cargo)
-        {
-            throw new Exception();
-
-        }
-
-        public async Task Update()
-        {
-            throw new Exception();
-        }
-
-        public Task Delete(Guid id)
+        Task<List<Cargo>> ICargosRepository.Get()
         {
             throw new NotImplementedException();
         }

@@ -26,7 +26,7 @@ namespace CargoTrans
         private async Task DisplayCargosAsync()
         {
             repos = new CargosRepository(_dbContext);
-            var cargosEntities = await repos.GetWithInclude();
+            var cargosEntities = await repos.GetWithType();
 
             var cargos = cargosEntities
                 .Select(c => new Cargo
