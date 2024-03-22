@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DB.Repositories
 {
-    public class CargosRepository : IRepository
+    public class CargosRepository
     {
         private readonly CargosDbContext _dbContext;
         private readonly DbSet<CargoEntity> _cargos;
