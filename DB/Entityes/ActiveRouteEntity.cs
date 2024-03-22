@@ -1,18 +1,18 @@
 ﻿namespace DB.Entities;
 
-public partial class ActiveRouteEntity
+public class ActiveRouteEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public int? RouteId { get; set; }
+    public Guid RouteId { get; set; }
 
-    public int? DriverId { get; set; }
+    public Guid DriverId { get; set; }
 
     public DateTime EndTime { get; set; }
 
-    public int? CarId { get; set; }
+    public Guid CarId { get; set; }
 
-    public int? CargoId { get; set; }
+    public Guid CargoId { get; set; }
 
     public virtual CarEntity? Car { get; set; }
 

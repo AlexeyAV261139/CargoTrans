@@ -1,8 +1,8 @@
 ﻿namespace DB.Entities;
 
-public partial class CarEntity
+public class CarEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Brand { get; set; } = null!;
 
@@ -10,5 +10,5 @@ public partial class CarEntity
 
     public int LoadCapacityPerKg { get; set; }
 
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+    public List<ActiveRouteEntity> ActiveRoutes { get; set; } = [];
 }

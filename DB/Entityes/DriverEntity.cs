@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DB.Entities;
 
-namespace DB.Entities;
-
-public partial class DriverEntity
+public class DriverEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public string FirstName { get; set; } = string.Empty;
 
-    public string LastName { get; set; } = null!;
+    public string LastName { get; set; } = string.Empty;
 
-    public string Phone { get; set; } = null!;
+    public string Phone { get; set; } = string.Empty;
 
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+    public  List<ActiveRouteEntity> ActiveRoutes { get; set; } = [];
 }

@@ -18,7 +18,7 @@ namespace DB.Repositories
 
         public Task Create(Cargo cargo)
         {
-
+            throw new NotImplementedException();
         }
 
         public Task Delete(Guid id)

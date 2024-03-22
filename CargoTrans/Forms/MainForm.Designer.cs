@@ -62,7 +62,7 @@
             buttonSave.TabIndex = 2;
             buttonSave.Text = "Сохранить";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += buttonSave_Click;
+            buttonSave.Click += ButtonSave_Click;
             // 
             // menuStrip1
             // 
@@ -88,7 +88,7 @@
             грузыToolStripMenuItem.Name = "грузыToolStripMenuItem";
             грузыToolStripMenuItem.Size = new Size(93, 36);
             грузыToolStripMenuItem.Text = "Грузы";
-            грузыToolStripMenuItem.Click += cargoToolStripMenuItem_Click;
+            грузыToolStripMenuItem.Click += CargoToolStripMenuItem_Click;
             // 
             // автоToolStripMenuItem
             // 

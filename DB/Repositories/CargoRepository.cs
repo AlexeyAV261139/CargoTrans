@@ -1,21 +1,28 @@
 ﻿using Application.Interfaces.Repositories;
+using AutoMapper;
 using Core.Models;
-using Microsoft.EntityFrameworkCore;
+using DB.Entities;
 
 namespace DB.Repositories
 {
     public class CargoRepository : ICargosRepository
     {
         private readonly CargosDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public CargoRepository(CargosDbContext cargosDbContext)
+        public CargoRepository(CargosDbContext cargosDbContext, IMapper mapper)
         {
             _dbContext = cargosDbContext;
+            _mapper = mapper;
         }
 
         public Task Create(Cargo cargo)
         {
-            throw new NotImplementedException();
+            var cargoEntity = new CargoEntity()
+            {
+                Id = cargo.Id,
+
+            };throw new NotImplementedException();
         }
 
         public Task Delete(Guid id)
@@ -35,10 +42,7 @@ namespace DB.Repositories
 
         public async Task<List<Cargo>> Get()
         {
-            return await _dbContext.Cargos
-                           .AsNoTracking()
-                           .Include(c => c.CargoType)
-                           .ToListAync();
+            throw  new NotSupportedException();
         }
     }
 }

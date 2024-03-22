@@ -1,14 +1,14 @@
 ﻿namespace DB.Entities;
 
-public partial class CargoEntity
+public class CargoEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public int? CargoTypeId { get; set; }
+    public Guid CargoTypeId { get; set; }
 
-    public string? Requirements { get; set; }
+    public string Requirements { get; set; } = string.Empty;
 
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+    public List<ActiveRouteEntity> ActiveRoutes { get; set; } = [];
 
-    public virtual CargoTypeEntity? CargoType { get; set; }
+    public CargoTypeEntity? CargoType { get; set; }
 }

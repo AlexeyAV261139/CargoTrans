@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DB.Entities;
 
-namespace DB.Entities;
-
-public partial class RouteEntity
+public class RouteEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public string Destination { get; set; } = null!;
+    public string Destination { get; set; } = string.Empty;
 
-    public int? DistancvePerKm { get; set; }
+    public int DistancePerKm { get; set; }
 
-    public int? PricePerPenny { get; set; }
+    public decimal Price{ get; set; }
 
-    public virtual ICollection<ActiveRouteEntity> ActiveRoutes { get; set; } = new List<ActiveRouteEntity>();
+    public List<ActiveRouteEntity> ActiveRoutes { get; set; } = [];
 }

@@ -43,7 +43,7 @@ namespace CargoTrans
 
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             dataGridViewMain.DataSource = null;
         }
@@ -53,31 +53,15 @@ namespace CargoTrans
 
         }
 
-        private async void cargoToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void CargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await DisplayCargosAsync();
         }
 
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayCarsAsync();
-        }
 
-        private Task DisplayCarsAsync()
-        {
-            repos = new CarsRepository(_dbContext);
-            var cars = await repos.Get();
-
-            var cargos = cars
-                .Select(c => new Car
-                {
-                   Brand = c.,
-                   Number = ,
-                   LoadCapacityPerKg = 
-                });
-
-            dataGridViewMain.DataSource = cargos.ToDataTable();
-        }
+        }        
 
         private void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
