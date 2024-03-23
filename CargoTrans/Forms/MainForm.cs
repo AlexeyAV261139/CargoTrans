@@ -1,3 +1,4 @@
+using Application.Interfaces.Services;
 using Core.Models;
 using DB;
 using DB.Repositories;
@@ -9,13 +10,14 @@ namespace CargoTrans
     public partial class MainForm : Form
     {
         private readonly CargosDbContext _dbContext;
-        private CargosRepository repos;
+        private readonly CargoService _cargoService;
 
 
         public MainForm()
         {
             InitializeComponent();
             _dbContext = new CargosDbContext();
+            _cargoService = new CargoService(new CargoRepository(_dbContext));
         }
 
         protected async override void OnLoad(EventArgs e)
@@ -25,15 +27,7 @@ namespace CargoTrans
 
         private async Task DisplayCargosAsync()
         {
-            repos = new CargosRepository(_dbContext);
-            var cargosEntities = await repos.GetWithType();
-
-            var cargos = cargosEntities
-                .Select(c => new Cargo
-                {
-                    Type = c.CargoType.Name,
-                    Requirements = c.Requirements
-                });
+            var cargos = await _cargoService.GetCargosAsync();            
 
             dataGridViewMain.DataSource = cargos.ToDataTable();
         }

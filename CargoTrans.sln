@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CargoTrans", "CargoTrans\CargoTrans.csproj", "{47F2EB70-2FD0-43FE-95AD-AB475FEB1EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "CargoTrans\View.csproj", "{47F2EB70-2FD0-43FE-95AD-AB475FEB1EB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DB", "DB\DB.csproj", "{EC33E8FE-5708-49D5-9B92-0FF40979C762}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CargosTests", "CargosTests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{57EBFEA7-AE19-4C94-98A3-97284039A633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{01C0A975-7592-4574-AB1F-66B06705485B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{01C0A975-7592-4574-AB1F-66B06705485B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

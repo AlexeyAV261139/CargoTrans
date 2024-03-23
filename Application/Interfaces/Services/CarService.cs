@@ -3,14 +3,9 @@ using Core.Models;
 
 namespace Application.Interfaces.Services
 {
-    public class CarService
+    public class CarService(ICarRepository carRepository)
     {
-        private readonly ICarRepository _carRepository;
-
-        public CarService(ICarRepository carRepository)
-        {
-            _carRepository = carRepository;
-        }
+        private readonly ICarRepository _carRepository = carRepository;        
 
         public async Task CreateCar(Car car)
         {
@@ -21,8 +16,5 @@ namespace Application.Interfaces.Services
         {
             return await _carRepository.Get();
         }
-
-
-
     }
 }
