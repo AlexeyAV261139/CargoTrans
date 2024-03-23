@@ -21,8 +21,8 @@ namespace DB.Repositories
             var cargoEntity = new CargoEntity()
             {
                 Id = cargo.Id,
-
-            };throw new NotImplementedException();
+                
+            };
         }
 
         public Task Delete(Guid id)
