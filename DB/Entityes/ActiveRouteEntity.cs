@@ -2,7 +2,7 @@
 
 public class ActiveRouteEntity
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid RouteId { get; set; }
 

@@ -2,7 +2,7 @@
 
 public class CargoEntity
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid CargoTypeId { get; set; }
 
