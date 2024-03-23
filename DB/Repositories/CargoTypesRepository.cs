@@ -46,9 +46,32 @@ namespace DB.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<CargoType> GetOrCreateByName(string name)
+        public async Task<CargoType?> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var typeEntity = await _context.CargoTypes.FirstOrDefaultAsync(t => t.Name == name);
+            if (typeEntity == null)
+                return null;
+            var type = new CargoType
+            {
+                Id = typeEntity.Id,
+                Name = typeEntity.Name
+            };
+            return type;
+        }
+
+        public async Task<CargoType> GetOrCreateByName(string name)
+        {
+            var type = await GetByName(name);
+
+            if (type == null)
+            {
+                type = new CargoType
+                {
+                    Name = name
+                };
+                await Create(type);
+            }
+            return type;
         }
 
         public Task Update(CargoType cargo)

@@ -2,7 +2,7 @@
 {
     public class ActiveRoute
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string Destination { get; set; } = string.Empty;
 

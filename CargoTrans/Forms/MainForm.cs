@@ -2,6 +2,7 @@ using Application.Interfaces.Services;
 using DB;
 using DB.Repositories;
 using System.ComponentModel;
+using View.Forms;
 
 namespace CargoTrans
 {
@@ -26,7 +27,7 @@ namespace CargoTrans
 
         private async Task DisplayCargosAsync()
         {
-            var cargos = await _cargoService.GetCargosAsync();            
+            var cargos = await _cargoService.GetCargosAsync();
 
             dataGridViewMain.DataSource = cargos.ToDataTable();
         }
@@ -54,7 +55,7 @@ namespace CargoTrans
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-        }        
+        }
 
         private void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -66,5 +67,10 @@ namespace CargoTrans
 
         }
 
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            var addForm = new AddingForm();
+            addForm.Show();
+        }
     }
 }

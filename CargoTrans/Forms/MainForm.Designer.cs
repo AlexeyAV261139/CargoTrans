@@ -37,6 +37,7 @@
             автоToolStripMenuItem = new ToolStripMenuItem();
             водителиToolStripMenuItem = new ToolStripMenuItem();
             маршрутыToolStripMenuItem = new ToolStripMenuItem();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMain).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -50,7 +51,7 @@
             dataGridViewMain.Margin = new Padding(3, 4, 3, 4);
             dataGridViewMain.Name = "dataGridViewMain";
             dataGridViewMain.RowHeadersWidth = 51;
-            dataGridViewMain.Size = new Size(1171, 361);
+            dataGridViewMain.Size = new Size(939, 361);
             dataGridViewMain.TabIndex = 0;
             // 
             // buttonSave
@@ -72,50 +73,61 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 3, 0, 3);
-            menuStrip1.Size = new Size(1415, 42);
+            menuStrip1.Size = new Size(1415, 35);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
             // 
             // рейсыToolStripMenuItem
             // 
             рейсыToolStripMenuItem.Name = "рейсыToolStripMenuItem";
-            рейсыToolStripMenuItem.Size = new Size(96, 36);
+            рейсыToolStripMenuItem.Size = new Size(78, 29);
             рейсыToolStripMenuItem.Text = "Рейсы";
             рейсыToolStripMenuItem.Click += ActiveRoutesToolStripMenuItem_Click;
             // 
             // грузыToolStripMenuItem
             // 
             грузыToolStripMenuItem.Name = "грузыToolStripMenuItem";
-            грузыToolStripMenuItem.Size = new Size(93, 36);
+            грузыToolStripMenuItem.Size = new Size(74, 29);
             грузыToolStripMenuItem.Text = "Грузы";
             грузыToolStripMenuItem.Click += CargoToolStripMenuItem_Click;
             // 
             // автоToolStripMenuItem
             // 
             автоToolStripMenuItem.Name = "автоToolStripMenuItem";
-            автоToolStripMenuItem.Size = new Size(80, 36);
+            автоToolStripMenuItem.Size = new Size(65, 29);
             автоToolStripMenuItem.Text = "Авто";
             автоToolStripMenuItem.Click += CarsToolStripMenuItem_Click;
             // 
             // водителиToolStripMenuItem
             // 
             водителиToolStripMenuItem.Name = "водителиToolStripMenuItem";
-            водителиToolStripMenuItem.Size = new Size(133, 36);
+            водителиToolStripMenuItem.Size = new Size(106, 29);
             водителиToolStripMenuItem.Text = "Водители";
             водителиToolStripMenuItem.Click += DriversToolStripMenuItem_Click;
             // 
             // маршрутыToolStripMenuItem
             // 
             маршрутыToolStripMenuItem.Name = "маршрутыToolStripMenuItem";
-            маршрутыToolStripMenuItem.Size = new Size(148, 36);
+            маршрутыToolStripMenuItem.Size = new Size(118, 29);
             маршрутыToolStripMenuItem.Text = "Маршруты";
             маршрутыToolStripMenuItem.Click += RoutesToolStripMenuItem_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(1001, 214);
+            button1.Name = "button1";
+            button1.Size = new Size(103, 30);
+            button1.TabIndex = 4;
+            button1.Text = "Добавить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += AddButton_Click;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1415, 544);
+            Controls.Add(button1);
             Controls.Add(buttonSave);
             Controls.Add(dataGridViewMain);
             Controls.Add(menuStrip1);
@@ -142,5 +154,6 @@
         private ToolStripMenuItem автоToolStripMenuItem;
         private ToolStripMenuItem водителиToolStripMenuItem;
         private ToolStripMenuItem маршрутыToolStripMenuItem;
+        private Button button1;
     }
 }
