@@ -56,7 +56,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(358, 459);
+            buttonSave.Location = new Point(67, 462);
             buttonSave.Margin = new Padding(3, 4, 3, 4);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(117, 31);
@@ -114,7 +114,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(1001, 214);
+            button1.Location = new Point(1015, 254);
             button1.Name = "button1";
             button1.Size = new Size(103, 30);
             button1.TabIndex = 4;

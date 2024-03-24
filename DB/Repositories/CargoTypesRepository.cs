@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces.Repositories;
-using AutoMapper;
 using Core.Models;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +18,7 @@ namespace DB.Repositories
         {
             var typeEntity = new CargoTypeEntity()
             {
+                Id = cargoType.Id,
                 Name = cargoType.Name,
             };
             await _context.CargoTypes.AddAsync(typeEntity);
@@ -69,9 +69,10 @@ namespace DB.Repositories
                 {
                     Name = name
                 };
-                await Create(type);
+                await Create(type);                
             }
             return type;
+            
         }
 
         public Task Update(CargoType cargo)

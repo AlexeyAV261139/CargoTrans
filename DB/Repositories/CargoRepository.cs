@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces.Repositories;
-using AutoMapper;
 using Core.Models;
 using DB.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +18,16 @@ namespace DB.Repositories
 
         public async Task Create(Cargo cargo)
         {
-            var type = await _typesRepository.GetOrCreateByName(cargo.Type);
+            var type = await _typesRepository.GetByName(cargo.Type);
+            if (type == null)
+            {
+                type = new CargoType
+                {
+                    Name = cargo.Type
+                };
+                await _typesRepository.Create(type);
+            }
+
             var cargoEntity = new CargoEntity()
             {
                 Id = cargo.Id,
