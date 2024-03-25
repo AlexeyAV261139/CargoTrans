@@ -30,6 +30,7 @@ namespace CargoTrans
             var cargos = await _cargoService.GetCargosAsync();
 
             dataGridViewMain.DataSource = cargos.ToDataTable();
+            dataGridViewMain.Columns["Id"].Visible = false;
         }
 
         protected override void OnClosing(CancelEventArgs e)
