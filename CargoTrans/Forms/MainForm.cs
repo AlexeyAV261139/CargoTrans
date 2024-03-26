@@ -1,4 +1,3 @@
-using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using DB;
 using DB.Repositories;
@@ -16,7 +15,7 @@ namespace CargoTrans
         private readonly CarService _carService;
         private readonly ActiveRouteService _activeRouteService;
         private readonly RouteService _routeService;
-        private readonly FormOpener _formOpener;
+        private readonly CargoTypeService _cargoTypeService;
 
         private Action Add;
 
@@ -31,9 +30,10 @@ namespace CargoTrans
             _cargoService = new CargoService(new CargoRepository(_dbContext));
             _activeRouteService = new ActiveRouteService(new ActiveRouteRepository(_dbContext));
             _driverService = new DriverService(new DriverRepository(_dbContext));
+            _routeService = new RouteService(new RouteRepository(_dbContext));
+            _cargoTypeService = new CargoTypeService(new CargoTypesRepository(_dbContext));
 
-            _formOpener = new FormOpener();
-            Add = _formOpener.AddCargo;
+            Add = () => new CarAddForm().Show();
         }
 
         protected async override void OnLoad(EventArgs e)
@@ -70,14 +70,14 @@ namespace CargoTrans
             await DisplayDriversAsync();
         }
 
-
         private async void RoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await DisplayRoutesAsync();
         }
+
         private async Task DisplayCarsAsync()
         {
-            Add = _formOpener.AddCar;
+            Add = () => new CarAddForm().Show();
 
 
             var cars = await _carService.GetCars();
@@ -88,7 +88,7 @@ namespace CargoTrans
 
         private async Task DisplayDriversAsync()
         {
-            Add = _formOpener.AddDriver;
+            Add = () => new DriverAddForm(_driverService).Show();
 
             var drivers = await _driverService.GetDriversAsync();
 
@@ -98,7 +98,7 @@ namespace CargoTrans
 
         private async Task DisplayRoutesAsync()
         {
-            Add = _formOpener.AddRoute;
+            Add = () => new RouteAddForm().Show();
 
             var routes = await _routeService.GetRoutesAsync();
 
@@ -108,7 +108,7 @@ namespace CargoTrans
 
         private async Task DisplayActiveRoutesAsync()
         {
-            Add = _formOpener.AddActiveRoute;
+            Add = () => new ActiveRouteAddForm().Show();
 
             var activeRoutes = await _activeRouteService.GetActiveRoutesAsync();
             dataGridViewMain.DataSource = activeRoutes;
@@ -117,30 +117,13 @@ namespace CargoTrans
 
         private async Task DisplayCargosAsync()
         {
-            Add = _formOpener.AddCargo;
+            Add = () => new CargoAddForm(_cargoService, _cargoTypeService).Show();
             var cargos = await _cargoService.GetCargosAsync();
 
             dataGridViewMain.DataSource = cargos.ToDataTable();
             dataGridViewMain.Columns["Id"].Visible = false;
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            Add();            
-        }        
-    }
-
-    public class FormOpener
-    {
-        public void AddCargo() => new CargoAddForm().Show();
-
-        public void AddCar() => new CarAddForm().Show();
-
-        public void AddRoute() => new RouteAddForm().Show();
-
-        public void AddDriver() => new DriverAddForm().Show();
-
-        public void AddActiveRoute() => new ActiveRouteAddForm().Show();
-
+        private void AddButton_Click(object sender, EventArgs e) => Add();            
     }
 }

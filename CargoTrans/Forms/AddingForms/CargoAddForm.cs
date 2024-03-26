@@ -1,7 +1,5 @@
 ﻿using Application.Interfaces.Services;
 using Core.Models;
-using DB;
-using DB.Repositories;
 
 namespace View.Forms
 {
@@ -10,14 +8,16 @@ namespace View.Forms
         private readonly CargoService _cargoService;
         private readonly CargoTypeService _typeService;
 
-        public CargoAddForm()
+        public CargoAddForm(CargoService cargoService, CargoTypeService typeService)
         {
             InitializeComponent();
-            var context = new CargosDbContext();
-            _cargoService = new CargoService(new CargoRepository(context));
-            _typeService = new CargoTypeService(new CargoTypesRepository(context));
+            _typeService = typeService;
+            _cargoService = cargoService;
+        }
 
-           
+        private async void CargoAddForm_Load(object sender, EventArgs e)
+        {
+            await LoadAutoCompleteDataForTextBox();
         }
 
         private async void AddButton_Click(object sender, EventArgs e)
@@ -26,6 +26,7 @@ namespace View.Forms
             await _cargoService.CreateCargoAsync(cargo);
             MessageBox.Show("Успешно");
         }
+        
 
         private Cargo GetCargoFromForm()
         {
@@ -34,12 +35,7 @@ namespace View.Forms
                 Type = TypeTextBox.Text,
                 Requirements = textBox1.Text
             };
-        }
-
-        private async void CargoAddForm_Load(object sender, EventArgs e)
-        {
-            await LoadAutoCompleteDataForTextBox();
-        }
+        }             
 
         private async Task LoadAutoCompleteDataForTextBox()
         {
