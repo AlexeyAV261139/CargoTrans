@@ -7,7 +7,7 @@ namespace Application.Interfaces.Services
     {
         private readonly ICargosRepository _cargosRepository = cargosRepository;
 
-        public async Task CreateCargo(Cargo cargo)
+        public async Task CreateCargoAsync(Cargo cargo)
         {
             await _cargosRepository.Create(cargo);
         }
