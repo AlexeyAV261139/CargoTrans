@@ -12,7 +12,7 @@ namespace Application.Interfaces.Services
             await _repository.Create(route);
         }
 
-        public async Task<List<Route>> GetCargosAsync()
+        public async Task<List<Route>> GetRoutesAsync()
         {
             return await _repository.Get();
         }
