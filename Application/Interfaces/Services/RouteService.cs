@@ -7,7 +7,7 @@ namespace Application.Interfaces.Services
     {
         private readonly IRouteRepository _repository = repository;
 
-        public async Task CreateCargoAsync(Route route)
+        public async Task CreateRouteAsync(Route route)
         {
             await _repository.Create(route);
         }

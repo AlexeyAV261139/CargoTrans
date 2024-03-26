@@ -65,7 +65,6 @@
             buttonSave.TabIndex = 2;
             buttonSave.Text = "Сохранить";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += ButtonSave_Click;
             // 
             // menuStrip1
             // 
@@ -122,7 +121,7 @@
             button1.TabIndex = 4;
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += AddButton_Click;
+            button1.Click += AppendButton_Click;
             // 
             // panel1
             // 

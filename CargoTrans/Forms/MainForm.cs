@@ -1,7 +1,6 @@
 using Application.Interfaces.Services;
 using DB;
 using DB.Repositories;
-using System.ComponentModel;
 using View.Forms;
 
 namespace CargoTrans
@@ -9,20 +8,21 @@ namespace CargoTrans
 
     public partial class MainForm : Form
     {
-        private readonly DriverService _driverService;
         private readonly CargosDbContext _dbContext;
+        private readonly DriverService _driverService;
         private readonly CargoService _cargoService;
         private readonly CarService _carService;
         private readonly ActiveRouteService _activeRouteService;
         private readonly RouteService _routeService;
         private readonly CargoTypeService _cargoTypeService;
 
-        private Action Add;
+        private Action OpenAppendForm = () => new CarAddForm().Show();
 
 
         public MainForm()
         {
             InitializeComponent();
+
             _dbContext = new CargosDbContext();
 
             _cargoService = new CargoService(new CargoRepository(_dbContext));
@@ -31,99 +31,55 @@ namespace CargoTrans
             _activeRouteService = new ActiveRouteService(new ActiveRouteRepository(_dbContext));
             _driverService = new DriverService(new DriverRepository(_dbContext));
             _routeService = new RouteService(new RouteRepository(_dbContext));
-            _cargoTypeService = new CargoTypeService(new CargoTypesRepository(_dbContext));
-
-            Add = () => new CarAddForm().Show();
+            _cargoTypeService = new CargoTypeService(new CargoTypesRepository(_dbContext));            
         }
 
-        protected async override void OnLoad(EventArgs e)
-        {
-            await DisplayCargosAsync();            
-        }        
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-
-        }
-
-        private void ButtonSave_Click(object sender, EventArgs e)
-        {
-        }
+        protected override void OnLoad(EventArgs e) => CargoToolStripMenuItem_Click(this, e);
 
         private async void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayActiveRoutesAsync();
+            ChangeFormForAppendButtonOn(new ActiveRouteAddForm());
+            var activeRoutes = await _activeRouteService.GetActiveRoutesAsync();
+            DisplayListOnDataTable(activeRoutes);
         }
 
         private async void CargoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayCargosAsync();
+            ChangeFormForAppendButtonOn(new CargoAddForm(_cargoService, _cargoTypeService));
+            var cargos = await _cargoService.GetCargosAsync();
+            DisplayListOnDataTable(cargos);
         }
 
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayCarsAsync();
+            ChangeFormForAppendButtonOn(new CarAddForm());
+            var cars = await _carService.GetCars();
+            DisplayListOnDataTable(cars);
         }
 
         private async void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayDriversAsync();
+            ChangeFormForAppendButtonOn(new DriverAddForm(_driverService));
+            var drivers = await _driverService.GetDriversAsync();
+            DisplayListOnDataTable(drivers);
         }
 
         private async void RoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            await DisplayRoutesAsync();
-        }
-
-        private async Task DisplayCarsAsync()
-        {
-            Add = () => new CarAddForm().Show();
-
-
-            var cars = await _carService.GetCars();
-
-            dataGridViewMain.DataSource = cars.ToDataTable();
-            dataGridViewMain.Columns["Id"].Visible = false;
-        }
-
-        private async Task DisplayDriversAsync()
-        {
-            Add = () => new DriverAddForm(_driverService).Show();
-
-            var drivers = await _driverService.GetDriversAsync();
-
-            dataGridViewMain.DataSource = drivers.ToDataTable();
-            dataGridViewMain.Columns["Id"].Visible = false;
-        }
-
-        private async Task DisplayRoutesAsync()
-        {
-            Add = () => new RouteAddForm().Show();
-
+            ChangeFormForAppendButtonOn(new RouteAddForm(_routeService));
             var routes = await _routeService.GetRoutesAsync();
+            DisplayListOnDataTable(routes);
+        } 
 
-            dataGridViewMain.DataSource = routes.ToDataTable();
-            dataGridViewMain.Columns["Id"].Visible = false;
-        }
-
-        private async Task DisplayActiveRoutesAsync()
+        private void DisplayListOnDataTable<T>(List<T> data)
         {
-            Add = () => new ActiveRouteAddForm().Show();
-
-            var activeRoutes = await _activeRouteService.GetActiveRoutesAsync();
-            dataGridViewMain.DataSource = activeRoutes;
+            dataGridViewMain.DataSource = data.ToDataTable();
             dataGridViewMain.Columns["Id"].Visible = false;
         }
 
-        private async Task DisplayCargosAsync()
-        {
-            Add = () => new CargoAddForm(_cargoService, _cargoTypeService).Show();
-            var cargos = await _cargoService.GetCargosAsync();
+        private void ChangeFormForAppendButtonOn(Form form)
+           => OpenAppendForm = () => form.Show();
 
-            dataGridViewMain.DataSource = cargos.ToDataTable();
-            dataGridViewMain.Columns["Id"].Visible = false;
-        }
-
-        private void AddButton_Click(object sender, EventArgs e) => Add();            
+        private void AppendButton_Click(object sender, EventArgs e) => OpenAppendForm();            
     }
 }

@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DB.Repositories
 {
-    public class CargoTypesRepository : ICargoTypesRepository
+    public class CargoTypesRepository(CargosDbContext context) : ICargoTypesRepository
     {
-        private readonly CargosDbContext _context;
-
-        public CargoTypesRepository(CargosDbContext context)
-        {
-            _context = context;
-        }
+        private readonly CargosDbContext _context = context;
 
         public async Task Create(CargoType cargoType)
         {
