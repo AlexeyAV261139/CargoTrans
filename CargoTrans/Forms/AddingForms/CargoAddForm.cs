@@ -22,11 +22,21 @@ namespace View.Forms
 
         private async void AddButton_Click(object sender, EventArgs e)
         {
-            Cargo cargo = GetCargoFromForm();
-            await _cargoService.CreateCargoAsync(cargo);
-            MessageBox.Show("Успешно");
+            try
+            {
+                Cargo cargo = GetCargoFromForm();
+                await _cargoService.CreateCargoAsync(cargo);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MessageBox.Show("Успешно");
+            }
         }
-        
+
 
         private Cargo GetCargoFromForm()
         {
@@ -35,9 +45,9 @@ namespace View.Forms
                 Type = TypeTextBox.Text,
                 Requirements = textBox1.Text
             };
-        }             
+        }
 
-        private async Task LoadAutoCompleteDataForTextBox()
+        private async Task LoadAutoCompleteDataForTextBox() 
         {
             var types = await _typeService.GetCargoTypesAsync();
             var typesNames = types

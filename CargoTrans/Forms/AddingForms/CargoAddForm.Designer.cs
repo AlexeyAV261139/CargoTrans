@@ -37,7 +37,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(181, 272);
+            button1.Location = new Point(185, 322);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(86, 31);
@@ -52,7 +52,7 @@
             TypeTextBox.Location = new Point(136, 99);
             TypeTextBox.Margin = new Padding(3, 4, 3, 4);
             TypeTextBox.Name = "TypeTextBox";
-            TypeTextBox.Size = new Size(161, 27);
+            TypeTextBox.Size = new Size(208, 27);
             TypeTextBox.TabIndex = 1;
             // 
             // textBox1
@@ -62,7 +62,7 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(161, 79);
+            textBox1.Size = new Size(208, 163);
             textBox1.TabIndex = 2;
             // 
             // label1
