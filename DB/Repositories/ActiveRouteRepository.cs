@@ -1,6 +1,5 @@
 ﻿using Application.Interfaces.Repositories;
 using Core.Models;
-using DB.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DB.Repositories
