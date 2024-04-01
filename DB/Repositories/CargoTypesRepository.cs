@@ -18,12 +18,7 @@ namespace DB.Repositories
             };
             await _context.CargoTypes.AddAsync(typeEntity);
             _context.SaveChanges();
-        }
-
-        public Task Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        }              
 
         public async Task<List<CargoType>> Get()
         {
@@ -36,7 +31,7 @@ namespace DB.Repositories
                 .ToListAsync();             
         }
 
-        public Task<CargoType> GetById(Guid id)
+        public Task<CargoType?> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -68,11 +63,6 @@ namespace DB.Repositories
             }
             return type;
             
-        }
-
-        public Task Update(CargoType cargo)
-        {
-            throw new NotImplementedException();
         }
     }
 }

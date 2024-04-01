@@ -12,21 +12,16 @@ namespace DB.Repositories
 
         public async Task Create(Cargo cargo)
         {
-            var type = await _typesRepository.GetByName(cargo.Type);
+            var type = await _typesRepository.GetByName(cargo.Type.Name);
             if (type == null)
-            {
-                type = new CargoType
-                {
-                    Name = cargo.Type
-                };
+            {                
+                type = cargo.Type;
                 await _typesRepository.Create(type);
             }
-
             var cargoEntity = new CargoEntity()
             {
                 Id = cargo.Id,
-                CargoTypeId = type.Id,
-                Requirements = cargo.Requirements
+                CargoTypeId = type.Id
             };
             await _dbContext.Cargos.AddAsync(cargoEntity);
             await _dbContext.SaveChangesAsync();
@@ -53,8 +48,11 @@ namespace DB.Repositories
             var cargos = cargosEntity.Select(c => new Cargo
             {
                 Id = c.Id,
-                Type = c.CargoType.Name,
-                Requirements = c.Requirements
+                Type = new CargoType
+                {
+                    Id = c.CargoType.Id,
+                    Name = c.CargoType.Name,
+                }
             }).ToList();                         
 
             return cargos;
