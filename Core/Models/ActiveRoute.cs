@@ -4,11 +4,13 @@
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string Destination { get; set; } = string.Empty;
+        public required Cargo Cargo { get; set; }
+        
+        public required Car Car { get; set; }
 
-        public string DriverName { get; set; } = string.Empty;
+        public required Driver Driver { get; set; }
 
-        public string CarBrand {  get; set; } = string.Empty;
+        public required Route Route { get; set; }
 
         public DateTime DeadLine { get; set; }
     }
