@@ -21,6 +21,7 @@ namespace DB.Repositories
             var cargoEntity = new CargoEntity()
             {
                 Id = cargo.Id,
+                Requirements = cargo.Reequipments,
                 CargoTypeId = type.Id
             };
             await _dbContext.Cargos.AddAsync(cargoEntity);
@@ -52,7 +53,8 @@ namespace DB.Repositories
                 {
                     Id = c.CargoType.Id,
                     Name = c.CargoType.Name,
-                }
+                },
+                Reequipments = c.Requirements
             }).ToList();                         
 
             return cargos;
