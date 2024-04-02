@@ -7,6 +7,11 @@ namespace View.Forms
     {
         private readonly CargoService _cargoService;
         private readonly CargoTypeService _typeService;
+        private List<CargoType> _loadedTypes = [];
+
+        private string TypeText => TypeTextBox.Text.Trim();
+
+        private string ReequipmentsText => reequipmentsTextBox1.Text.Trim();
 
         public CargoAddForm(CargoService cargoService, CargoTypeService typeService)
         {
@@ -16,37 +21,52 @@ namespace View.Forms
         }
 
         private async void CargoAddForm_Load(object sender, EventArgs e)
+            => await FillTextBoxAutoCompleteData();
+
+        private async Task FillTextBoxAutoCompleteData()
         {
-            await LoadAutoCompleteDataForTextBox();
+            await LoadTypes();
+
+            var typesNames = _loadedTypes
+                            .Select(t => t.ToString())
+                            .ToArray();
+
+            AutoCompleteStringCollection source = [];
+            source.AddRange(typesNames);
+
+            TypeTextBox.AutoCompleteCustomSource = source;
+            TypeTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            TypeTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
+
+        private async Task LoadTypes() => 
+            _loadedTypes = await _typeService.GetCargoTypesAsync();
+
 
         private async void AddButton_Click(object sender, EventArgs e)
         {
-            Cargo cargo = GetCargoFromForm();
+            Cargo cargo = await GetCargoFromFormAsync();
             await _cargoService.CreateCargoAsync(cargo);
             MessageBox.Show("Успешно");
         }
         
 
-        private Cargo GetCargoFromForm()
+        private async Task<Cargo> GetCargoFromFormAsync()
         {
-            return new Cargo
+            var type = _loadedTypes.FirstOrDefault(t => t.Name == TypeTextBox.Text);
+            if (type is null)
             {
-                Type = TypeTextBox.Text,
-                Requirements = textBox1.Text
+                type = new CargoType
+                {
+                    Name = TypeText,
+                };
+                await _typeService.CreateTypeAsync(type);                
+            }
+            return new Cargo
+            {                
+                Reequipments = ReequipmentsText,
+                Type = type,
             };
-        }             
-
-        private async Task LoadAutoCompleteDataForTextBox()
-        {
-            var types = await _typeService.GetCargoTypesAsync();
-            var typesNames = types
-                .Select(t => t.ToString())
-                .ToArray();
-            AutoCompleteStringCollection source = [.. typesNames];
-            TypeTextBox.AutoCompleteCustomSource = source;
-            TypeTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            TypeTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        }
+        }  
     }
 }

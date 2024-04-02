@@ -34,7 +34,7 @@
             label3 = new Label();
             appendButton = new Button();
             numberMaskedTextBox = new MaskedTextBox();
-            brandMaskedTextBox = new MaskedTextBox();
+            brandTextBox = new TextBox();
             SuspendLayout();
             // 
             // capacityTextBox
@@ -82,27 +82,26 @@
             // 
             // numberMaskedTextBox
             // 
-            numberMaskedTextBox.Location = new Point(162, 109);
-            numberMaskedTextBox.Mask = "(999) 000-0000";
+            numberMaskedTextBox.Location = new Point(162, 104);
+            numberMaskedTextBox.Mask = "L_000_LL_00";
             numberMaskedTextBox.Name = "numberMaskedTextBox";
             numberMaskedTextBox.Size = new Size(162, 23);
-            numberMaskedTextBox.TabIndex = 7;
+            numberMaskedTextBox.TabIndex = 8;
+            numberMaskedTextBox.ValidatingType = typeof(int);
             // 
-            // brandMaskedTextBox
+            // brandTextBox
             // 
-            brandMaskedTextBox.Location = new Point(162, 67);
-            brandMaskedTextBox.Mask = "L_000_LL_00";
-            brandMaskedTextBox.Name = "brandMaskedTextBox";
-            brandMaskedTextBox.Size = new Size(162, 23);
-            brandMaskedTextBox.TabIndex = 8;
-            brandMaskedTextBox.ValidatingType = typeof(int);
+            brandTextBox.Location = new Point(162, 67);
+            brandTextBox.Name = "brandTextBox";
+            brandTextBox.Size = new Size(162, 23);
+            brandTextBox.TabIndex = 9;
             // 
             // CarAddForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(380, 261);
-            Controls.Add(brandMaskedTextBox);
+            Controls.Add(brandTextBox);
             Controls.Add(numberMaskedTextBox);
             Controls.Add(appendButton);
             Controls.Add(label3);
@@ -123,6 +122,6 @@
         private Label label3;
         private Button appendButton;
         private MaskedTextBox numberMaskedTextBox;
-        private MaskedTextBox brandMaskedTextBox;
+        private TextBox brandTextBox;
     }
 }

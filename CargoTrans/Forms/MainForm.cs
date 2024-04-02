@@ -5,7 +5,6 @@ using View.Forms;
 
 namespace CargoTrans
 {
-
     public partial class MainForm : Form
     {
         private readonly CargosDbContext _dbContext;
@@ -17,7 +16,6 @@ namespace CargoTrans
         private readonly CargoTypeService _cargoTypeService;
 
         private Action OpenAppendForm = () => new CarAddForm().Show();
-
 
         public MainForm()
         {
@@ -78,7 +76,7 @@ namespace CargoTrans
         }
 
         private void ChangeFormForAppendButtonOn(Form form)
-           => OpenAppendForm = () => form.Show();
+           => OpenAppendForm = form.Show;
 
         private void AppendButton_Click(object sender, EventArgs e) => OpenAppendForm();            
     }
