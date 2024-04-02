@@ -19,6 +19,7 @@ namespace DB.Repositories
                 Price = route.Price
             };
             await _context.Routes.AddAsync(routeEntity);
+            await _context.SaveChangesAsync();
         }
 
         public Task Delete(Guid id)
