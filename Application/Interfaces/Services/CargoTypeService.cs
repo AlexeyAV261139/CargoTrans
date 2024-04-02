@@ -7,9 +7,14 @@ namespace Application.Interfaces.Services
     {
         private readonly ICargoTypesRepository _typesRepository = typesRepository;
 
-        public async Task CreateType(CargoType type)
+        public async Task CreateTypeAsync(CargoType type)
         {
             await _typesRepository.Create(type);
+        }
+
+        public async Task<CargoType?> GetByName(string name)
+        {
+            return await _typesRepository.GetByName(name);
         }
 
         public async Task<List<CargoType>> GetCargoTypesAsync()
