@@ -15,10 +15,19 @@ namespace View.Forms
 
         private async void AddButton_Click(object sender, EventArgs e)
         {
-            Driver driver = GetDriverFromForm();
-            await _driverService.CreateDriverAsync(driver);
-            MessageBox.Show("Успешно");
-            this.Close();
+            try
+            {
+                Driver driver = GetDriverFromForm();
+                await _driverService.CreateDriverAsync(driver);
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MessageBox.Show("Успешно");
+            }
         }
 
         private Driver GetDriverFromForm()
@@ -27,7 +36,7 @@ namespace View.Forms
             {
                 FirstName = nameTextBox.Text,
                 LastName = surnameTextBox.Text,
-                Phone = phopeTextBox.Text
+                Phone = phoneMaskedTextBox.Text
             };
         }
     }
