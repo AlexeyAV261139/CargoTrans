@@ -15,7 +15,7 @@ namespace CargoTrans
         private readonly RouteService _routeService;
         private readonly CargoTypeService _cargoTypeService;
 
-        private Action OpenAppendForm = () => new CarAddForm().Show();
+        private Action OpenAppendForm;
 
         public MainForm()
         {
@@ -29,7 +29,9 @@ namespace CargoTrans
             _activeRouteService = new ActiveRouteService(new ActiveRouteRepository(_dbContext));
             _driverService = new DriverService(new DriverRepository(_dbContext));
             _routeService = new RouteService(new RouteRepository(_dbContext));
-            _cargoTypeService = new CargoTypeService(new CargoTypesRepository(_dbContext));            
+            _cargoTypeService = new CargoTypeService(new CargoTypesRepository(_dbContext));
+
+            OpenAppendForm = new CarAddForm(_carService).Show;
         }
 
         protected override void OnLoad(EventArgs e) => CargoToolStripMenuItem_Click(this, e);
@@ -50,7 +52,7 @@ namespace CargoTrans
 
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeFormForAppendButtonOn(new CarAddForm());
+            ChangeFormForAppendButtonOn(new CarAddForm(_carService));
             var cars = await _carService.GetCars();
             DisplayListOnDataTable(cars);
         }

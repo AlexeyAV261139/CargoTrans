@@ -79,6 +79,7 @@
             appendButton.TabIndex = 6;
             appendButton.Text = "Добавить";
             appendButton.UseVisualStyleBackColor = true;
+            appendButton.Click += AppendButton_Click;
             // 
             // numberMaskedTextBox
             // 
