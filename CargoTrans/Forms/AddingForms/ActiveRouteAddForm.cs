@@ -50,30 +50,10 @@ namespace View.Forms
 
             foreach (var car in cars)
             {
-                var name = car.Number;
-                carDict.Add(name, car);
-                carComboBox.Items.Add(name);
+                carDict.Add(car.Number, car);
             }
+
+            carComboBox.DataSource = new BindingSource(carDict, null);
         }
-
-        private void LoadDataAndFillItInComboBox(T )
-        {
-            var carDict = new Dictionary<string, T>();
-
-            var cars = await _carService.GetCarsAsync();
-
-            carComboBox.Items.Clear();
-
-            foreach (var car in cars)
-            {
-                var name = car.Number;
-                carDict.Add(name, car);
-                carComboBox.Items.Add(name);
-            }
-        }
-
-
-
-
     }
 }
