@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Services;
+﻿using Application.Services;
 using Core.Models;
 
 namespace View.Forms

@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using Core.Models;
 
-namespace Application.Interfaces.Services
+namespace Application.Services
 {
     public class CargoService(ICargosRepository cargosRepository)
     {

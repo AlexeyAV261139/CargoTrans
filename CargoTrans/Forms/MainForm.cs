@@ -1,4 +1,4 @@
-using Application.Interfaces.Services;
+using Application.Services;
 using DB;
 using DB.Repositories;
 using View.Forms;
@@ -38,7 +38,9 @@ namespace CargoTrans
 
         private async void ActiveRoutesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ChangeFormForAppendButtonOn(new ActiveRouteAddForm());
+            ChangeFormForAppendButtonOn(new ActiveRouteAddForm(
+                _cargoService,
+                _carService));
             var activeRoutes = await _activeRouteService.GetActiveRoutesAsync();
             DisplayListOnDataTable(activeRoutes);
         }
@@ -53,7 +55,7 @@ namespace CargoTrans
         private async void CarsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeFormForAppendButtonOn(new CarAddForm(_carService));
-            var cars = await _carService.GetCars();
+            var cars = await _carService.GetCarsAsync();
             DisplayListOnDataTable(cars);
         }
 

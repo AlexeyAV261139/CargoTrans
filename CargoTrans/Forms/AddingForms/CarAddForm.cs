@@ -1,32 +1,24 @@
-﻿using Application.Interfaces.Services;
+﻿using Application.Services;
 using Core.Models;
 
 namespace View.Forms
 {
     public partial class CarAddForm : Form
     {
-        private readonly CarService _carService;
+        private readonly CarService _service;
 
-        private string Brand => brandTextBox.Text.Trim();
-
-        private string Number => numberMaskedTextBox.Text.Trim();
-
-        private int Capacity =>
-            int.TryParse(capacityTextBox.Text, out int capacity) ? capacity : throw new Exception("Некорректная грузоподъемность");
-
-
-        public CarAddForm(CarService carService)
+        public CarAddForm(CarService service)
         {
             InitializeComponent();
-            _carService = carService;
+            _service = service;
         }
 
-        private async void AppendButton_Click(object sender, EventArgs e)
+        private async void appendButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Car car = GerCarFromForm();
-                await _carService.CreateCar(car);
+                var car = GetCarFromForm();
+                await _service.CreateCar(car);
             }
             catch (Exception ex)
             {
@@ -34,16 +26,21 @@ namespace View.Forms
             }
             finally
             {
-                MessageBox.Show("Успешно");
+                MessageBox.Show("Успешно!");
             }
         }
 
-        private Car GerCarFromForm()
-            => new()
+        private Car GetCarFromForm()
+        {
+            if (!int.TryParse(capacityTextBox.Text, out var capacity) || capacity < 0)
+                throw new Exception("некорректная вместимость");
+
+            return new Car
             {
-                Brand = Brand,
-                Number = Number,
-                LoadCapacityPerKg = Capacity
+                Brand = brandTextBox.Text,
+                Number = numberMaskedTextBox.Text,
+                LoadCapacityPerKg = capacity
             };
+        }
     }
 }
